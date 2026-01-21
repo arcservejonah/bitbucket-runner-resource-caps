@@ -14,7 +14,9 @@ sudo ./setup.sh
 
 - Print table of current containers and their quotas/limits
     ```bash
-    docker ps -aq | xargs -I {} docker inspect --format="{{.Id}} {{.Name}} {{.HostConfig.CpuQuota}} {{.HostConfig.Memory}} {{.HostConfig.MemorySwap}}" {} | awk 'BEGIN {printf "%-15s %-95s %-12s %-15s %-15s\n", "ID", "NAME", "CPU_QUOTA", "MEMORY", "SWAP"; printf "%-15s %-95s %-12s %-15s %-15s\n", "---------------", "-----------------------------------------------------------------------------------------------", "------------", "---------------", "---------------"} {printf "%-15s %-95s %-12s %-15s %-15s\n", substr($1,1,12), $2, $3, $4, $5}'
+    echo; echo; docker ps -aq | xargs -I {} docker inspect --format="{{.Id}} {{.Name}} {{.HostConfig.CpuQuota}} {{.HostConfig.Memory}} {{.HostConfig.MemorySwap}}" {} | awk 'BEGIN {printf "%-15s %-95s %-12s %-15s %-15s\n", "ID", "NAME", "CPU_QUOTA", "MEMORY", "SWAP"; printf "%-15s %-95s %-12s %-15s %-15s\n", "---------------", "-----------------------------------------------------------------------------------------------", "------------", "---------------", "---------------"} {printf "%-15s %-95s %-12s %-15s %-15s\n", substr($1,1,12), $2, $3, $4, $5}'
     ```
 - Monitor service
-    - `systemctl status --no-pager runner-resource-caps.service`
+    ```bash
+    systemctl status --no-pager runner-resource-caps.service
+    ```
