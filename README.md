@@ -9,6 +9,7 @@ The default resource caps as of writing this (01/20/2026) are 2 CPUs and 4GiB of
 ```bash
 git clone https://github.com/arcservejonah/bitbucket-runner-resource-caps.git
 cd bitbucket-runner-resource-caps
+# Edit resource caps as desired
 sudo ./setup.sh
 ```
 
