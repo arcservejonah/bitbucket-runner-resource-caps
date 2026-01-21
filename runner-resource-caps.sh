@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MEMORY=$((1024 * 1024 * 1024 * 32)) # 32 GiB
-CPU=16
+CPU=$((16 * 100000)) # 16 CPUs (quota in microseconds per 100ms period)
 
 while true
 do
