@@ -2,6 +2,8 @@
 
 Bitbucket docker runners set CPU and memory limits on the conatiners running steps for self-hosted runners. This is annoying when we want to run high resource tasks on our runners. This is a simple solution to that problem modeled after [this](https://github.com/tramseyer/bitbucket-pipelines-runner-unlimited)
 
+The default resource caps as of writing this (01/20/2026) are 2 CPUs and 4GiB of memory. Use this to override those and set your own values
+
 ## Install
 
 ```bash
