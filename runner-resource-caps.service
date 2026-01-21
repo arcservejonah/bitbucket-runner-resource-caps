@@ -1,0 +1,9 @@
+[Unit]
+Description=runner-resource-caps
+
+[Service]
+ExecStart=/root/runner-resource-caps.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

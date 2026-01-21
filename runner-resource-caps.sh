@@ -1,0 +1,25 @@
+#!/bin/bash
+
+MEMORY=$((1024 * 1024 * 1024 * 32)) # 32 GiB
+CPU=16
+
+while true
+do
+  for CONTAINER in $(docker ps -aq)
+  do
+    OUTPUT=$(docker inspect --format="{{.Id}} {{.Name}} {{.HostConfig.CpuQuota}} {{.HostConfig.Memory}} {{.HostConfig.MemorySwap}}" "$CONTAINER" | grep "*_build")
+    [ -z "$OUTPUT" ] && continue
+    ID=$(echo "$OUTPUT" | awk '{print $1}')
+    CURRENT_CPU=$(echo "$OUTPUT" | awk '{print $3}')
+    CURRENT_MEMORY=$(echo "$OUTPUT" | awk '{print $4}')
+    if [ "$CURRENT_CPU" != "$CPU" ]; then
+      echo "Found *_build container with CPU quota: $CURRENT_CPU. Setting to $CPU"
+      docker update --cpu-quota=$CPU "$ID"
+    fi
+    if [ "$CURRENT_MEMORY" != "$MEMORY" ]; then
+      echo "Found *_build container with Memory limit: $CURRENT_MEMORY. Setting to $MEMORY"
+      docker update --memory="$MEMORY" --memory-swap="$MEMORY" "$ID"
+    fi
+  done
+  sleep 10
+done
