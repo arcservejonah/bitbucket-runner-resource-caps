@@ -2,7 +2,7 @@
 Description=runner-resource-caps
 
 [Service]
-ExecStart=/usr/local/bin/runner-resource-caps.sh
+ExecStart=/usr/local/bin/runner-resource-caps
 Restart=always
 
 [Install]
