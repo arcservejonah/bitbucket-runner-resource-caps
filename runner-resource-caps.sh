@@ -7,7 +7,7 @@ while true
 do
   for CONTAINER in $(docker ps -aq)
   do
-    OUTPUT=$(docker inspect --format="{{.Id}} {{.Name}} {{.HostConfig.CpuQuota}} {{.HostConfig.Memory}} {{.HostConfig.MemorySwap}}" "$CONTAINER" | grep "*_build")
+    OUTPUT=$(docker inspect --format="{{.Id}} {{.Name}} {{.HostConfig.CpuQuota}} {{.HostConfig.Memory}} {{.HostConfig.MemorySwap}}" "$CONTAINER" | grep "_build")
     [ -z "$OUTPUT" ] && continue
     ID=$(echo "$OUTPUT" | awk '{print $1}')
     CURRENT_CPU=$(echo "$OUTPUT" | awk '{print $3}')
